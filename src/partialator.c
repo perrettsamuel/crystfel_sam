@@ -966,7 +966,7 @@ static void done_log(void *vqargs, void *vp)
 	struct log_args *task = vp;
 	struct log_qargs *qargs = vqargs;
 	qargs->n_done++;
-	progress_bar(qargs->n_done, qargs->n_crystals/20, "Writing logs/grid scans");
+	progress_bar(qargs->n_done, qargs->n_crystals, "Writing logs/grid scans");
 	free(task);
 }
 
