@@ -1786,7 +1786,7 @@ int main(int argc, char *argv[])
 
 		if ( do_write_logs ) {
 			//write_pgraph(full, crystals, n_crystals, itn+1, "",
-			             log_folder);
+			//             log_folder);
 		}
 
 		if ( output_everycycle ) {
