@@ -943,7 +943,7 @@ static void *get_log_task(void *vp)
 	task->pmodel = qargs->pmodel;
 	task->log_folder = qargs->log_folder;
 
-	qargs->next += 20;
+	qargs->next += 1;
 	return task;
 }
 
@@ -951,11 +951,11 @@ static void *get_log_task(void *vp)
 static void write_logs(void *vp, int cookie)
 {
 	struct log_args *args = vp;
-	write_specgraph(args->refls, args->cr, args->image, args->full,
-	                args->iter, args->cnum, args->log_folder);
-	write_gridscan(args->refls, args->cr, args->image, args->full,
-	               args->iter, args->cnum, args->scaleflags, args->pmodel,
-	               args->log_folder);
+	//write_specgraph(args->refls, args->cr, args->image, args->full,
+	//                args->iter, args->cnum, args->log_folder);
+	//write_gridscan(args->refls, args->cr, args->image, args->full,
+	//               args->iter, args->cnum, args->scaleflags, args->pmodel,
+	//               args->log_folder);
 	write_test_logs(args->cr, args->image, args->full, args->iter,
 	                args->cnum, args->log_folder);
 }
@@ -991,7 +991,7 @@ static void write_logs_parallel(struct crystal_refls *crystals, struct image **i
 	qargs.log_folder = log_folder;
 
 	run_threads(n_threads, write_logs, get_log_task, done_log, &qargs,
-	            n_crystals/20, 0, 0, 0);
+	            n_crystals, 0, 0, 0);
 }
 
 
@@ -1751,7 +1751,7 @@ int main(int argc, char *argv[])
 	show_all_residuals(crystals, n_crystals, full, no_free);
 
 	if ( do_write_logs ) {
-		write_pgraph(full, crystals, n_crystals, 0, "", log_folder);
+		//write_pgraph(full, crystals, n_crystals, 0, "", log_folder);
 		write_logs_parallel(crystals, images, n_crystals, full, 0, nthreads,
 		                    scaleflags, pmodel, log_folder);
 	}
@@ -1785,7 +1785,7 @@ int main(int argc, char *argv[])
 		show_all_residuals(crystals, n_crystals, full, no_free);
 
 		if ( do_write_logs ) {
-			write_pgraph(full, crystals, n_crystals, itn+1, "",
+			//write_pgraph(full, crystals, n_crystals, itn+1, "",
 			             log_folder);
 		}
 
@@ -1840,7 +1840,7 @@ int main(int argc, char *argv[])
 	/* Write final figures of merit (no rejection any more) */
 	show_all_residuals(crystals, n_crystals, full, no_free);
 	if ( do_write_logs ) {
-		write_pgraph(full, crystals, n_crystals, -1, "", log_folder);
+		//write_pgraph(full, crystals, n_crystals, -1, "", log_folder);
 		write_logs_parallel(crystals, images, n_crystals, full, -1, nthreads,
 		                    scaleflags, pmodel, log_folder);
 	}
